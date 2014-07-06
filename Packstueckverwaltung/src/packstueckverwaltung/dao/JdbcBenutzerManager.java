@@ -3,8 +3,11 @@ package packstueckverwaltung.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import packstueckverwaltung.model.Benutzer;
+import packstueckverwaltung.model.Berechtigung;
 
 public class JdbcBenutzerManager implements IBenutzerManager
 {
@@ -19,6 +22,16 @@ public class JdbcBenutzerManager implements IBenutzerManager
 		benutzer.setPasswort(rs.getString("Passwort"));
 
 		return benutzer;
+	}
+	
+	private Berechtigung loadBerechtigungFromResultSet(ResultSet rs) throws SQLException
+	{
+		Berechtigung berechtigung = new Berechtigung();
+		
+		berechtigung.setId(rs.getInt("id"));
+		berechtigung.setBerechtigung(rs.getString("Berechtigung"));
+
+		return berechtigung;
 	}
 
 	@Override
@@ -37,6 +50,35 @@ public class JdbcBenutzerManager implements IBenutzerManager
 		{
 			e.printStackTrace();
 			// eventuell E-Mail Versand des Fehlers, kann aber auch fehlschlagen
+		}
+		return null;
+	}
+	
+	public ArrayList<Berechtigung> getBenutzerRechte(int id)
+	{
+		try (Connection c = DatabaseHelper.getInstance();)
+		{
+			ArrayList<Berechtigung> berechtigungen = new ArrayList<Berechtigung>();
+			
+			//Berechtigungen werden über einen Join auf die ArmadaUserBerechtigung Tabelle ermittelt
+			String statement = "select ab.ID, ab.Beschreibung, ab.Berechtigung " +
+								"from ArmadaBerechtigung as ab " +
+								"inner join ArmadaUserBerechtigung as aub " + 
+								"on aub.ArmadaBerechtigungID = ab.ID " +
+								"where aub.ArmadaUserID = " + id;
+			
+			ResultSet rs = c.createStatement().executeQuery(statement);
+			
+			if (rs != null && rs.next())
+			{
+				berechtigungen.add(loadBerechtigungFromResultSet(rs));
+			}
+			
+			return berechtigungen;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
 		}
 		return null;
 	}

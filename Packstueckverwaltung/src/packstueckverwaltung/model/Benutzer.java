@@ -1,5 +1,7 @@
 package packstueckverwaltung.model;
 
+import java.util.ArrayList;
+
 public class Benutzer
 {
 	private int id;
@@ -7,7 +9,7 @@ public class Benutzer
 	private String passwort;
 	private String vorname;
 	private String nachname;
-	
+	private ArrayList<Berechtigung> berechtigungen;
 	
 	public int getId()
 	{
@@ -48,5 +50,14 @@ public class Benutzer
 	public void setNachname(String nachname)
 	{
 		this.nachname = nachname;
+	}
+	public ArrayList<Berechtigung> getBerechtigungen()
+	{
+		return berechtigungen;
+	}
+	public void setBerechtigungen(ArrayList<Berechtigung> berechtigungen)
+	{
+		this.berechtigungen = berechtigungen;
 	}	
+		
 }

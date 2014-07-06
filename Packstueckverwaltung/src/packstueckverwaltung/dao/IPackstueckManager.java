@@ -1,14 +1,17 @@
 package packstueckverwaltung.dao;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
+import packstueckverwaltung.model.Druckdaten;
+import packstueckverwaltung.model.Lagerwegdaten;
 import packstueckverwaltung.model.Packstueck;
 
 public interface IPackstueckManager
 {
-	Collection<Packstueck> getAllPackstücke();
-	Packstueck getPackstückById(Integer id);
-	Packstueck deletePackstückById(Integer id);
+	ArrayList<Packstueck> getAllPackstücke();
+	public Packstueck getPackstückByBarcode(String barcode);
+	Packstueck deletePackstückByBarcode(String barcode);
 	void saveOrUpdatePackstück(Packstueck packstück);
-	Packstueck getPackstückByCredentials(String email, String passwort);
+	ArrayList<Druckdaten> getDruckdatenByBarcode(String barcode);
+	ArrayList<Lagerwegdaten> getLagerwegdatenByBarcode(String barcode);
 }
