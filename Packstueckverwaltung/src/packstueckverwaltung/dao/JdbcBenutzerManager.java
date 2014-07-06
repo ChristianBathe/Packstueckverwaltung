@@ -24,7 +24,7 @@ public class JdbcBenutzerManager implements IBenutzerManager
 	@Override
 	public Benutzer getBenutzerByEmail(String email)
 	{
-		try (Connection c = DatabaseHelper.instance;)
+		try (Connection c = DatabaseHelper.getInstance();)
 		{
 			ResultSet rs = c.createStatement().executeQuery("select * from ArmadaUser where Email = " + "'" + email + "'");
 			
