@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DatabaseHelper
 {
-	static String driver = "com.microsoft.jdbc.sqlserver.SQLServerDriver";
-	private static String connectionString = "jdbc:microsoft:sqlserver://dealsad11wvm01.disversmold.net\\SQLEXPRESS;databaseName=Armada";
+	static String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	private static String connectionString = "jdbc:sqlserver://\\SQLEXPRESS;databaseName=Armada";
 	public static Connection instance = null;
 
 	static
@@ -15,7 +15,7 @@ public class DatabaseHelper
 		try
 		{			
 			Class.forName(driver);
-			Connection conn = DriverManager.getConnection(connectionString, "sa", "Dba2003!");			
+			instance = DriverManager.getConnection(connectionString,"","");			
 	
 					
 //			Context initCtx = new InitialContext();

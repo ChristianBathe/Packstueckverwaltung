@@ -34,6 +34,9 @@ public class DispatcherServlet extends HttpServlet
 			case "/login.html":
 				contentpage = "login";
 				break;
+			case "/index.html":
+				contentpage = "index";
+				break;
 		}
 		if (contentpage != null)
 		{

@@ -12,11 +12,11 @@ public class JdbcBenutzerManager implements IBenutzerManager
 	private Benutzer loadPersonFromResultSet(ResultSet rs) throws SQLException
 	{
 		Benutzer benutzer = new Benutzer();
-		// packstueck.setId(rs.getInt("id"));
-		// packstueck.setEmail(rs.getString("email"));
-		// packstueck.setFoto(rs.getBytes("foto"));
-		// packstueck.setGeburtsdatum(rs.getDate("geburtsdatum"));
-		// String g = rs.getString("geschlecht");
+		benutzer.setId(rs.getInt("id"));
+		benutzer.setVorname(rs.getString("Vorname"));
+		benutzer.setNachname(rs.getString("Nachname"));
+		benutzer.setEmail(rs.getString("Email"));
+		benutzer.setPasswort(rs.getString("Passwort"));
 
 		return benutzer;
 	}
@@ -26,9 +26,9 @@ public class JdbcBenutzerManager implements IBenutzerManager
 	{
 		try (Connection c = DatabaseHelper.instance;)
 		{
-			ResultSet rs = c.createStatement().executeQuery("select * from ArmadaUser where Name = " + email);
+			ResultSet rs = c.createStatement().executeQuery("select * from ArmadaUser where Email = " + "'" + email + "'");
 			
-			if (rs.next())
+			if (rs != null && rs.next())
 			{
 				return loadPersonFromResultSet(rs);
 			}

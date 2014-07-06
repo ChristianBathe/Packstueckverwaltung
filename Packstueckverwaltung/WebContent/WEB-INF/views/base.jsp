@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>FOM - Webprogrammierung</title>
+<title>FOM - Packstückverwaltung</title>
 <meta name="description" content="">
 <link rel="stylesheet"
 	href="<%=this.getServletContext().getContextPath()%>/css/style.css">

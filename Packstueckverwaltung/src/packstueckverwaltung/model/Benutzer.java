@@ -2,11 +2,21 @@ package packstueckverwaltung.model;
 
 public class Benutzer
 {
+	private int id;
 	private String email;
 	private String passwort;
 	private String vorname;
 	private String nachname;
 	
+	
+	public int getId()
+	{
+		return id;
+	}
+	public void setId(int id)
+	{
+		this.id = id;
+	}
 	public String getEmail()
 	{
 		return email;

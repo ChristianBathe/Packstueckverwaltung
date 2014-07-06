@@ -45,7 +45,8 @@ public class LoginServlet extends HttpServlet
 	{
 		Benutzer nutzer = DaoHelper.getBenutzerManager().getBenutzerByEmail(request.getParameter("email"));
 
-		if (nutzer != null)
+		//Prüfen, ob Daten gefunden wurden und falls ja, ob das eingegebene Passwort stimmt				
+		if (nutzer != null && request.getParameter("passwort").equals(nutzer.getPasswort()))
 		{
 			request.getSession().setAttribute("session_person", nutzer);
 			request.getSession().setAttribute("global_message", "Willkommen: " + nutzer.getVorname());
