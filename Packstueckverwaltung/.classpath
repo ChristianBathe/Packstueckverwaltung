@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="lib" path="libs/sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hoisc01/Dropbox/Studium/6. Semester/Web-Programmierung/apache-tomcat-7.0.52/apache-tomcat-7.0.52/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
