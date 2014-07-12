@@ -1,14 +1,26 @@
 table.grid {
-    border-collapse: collapse;
+	border-collapse: collapse;
 }
 
-table.grid td, table.grid th {
-    border: 1px solid black;
+table.grid td,table.grid th {
+	border: 1px solid black;
 }
 
-p.message{
+p.message {
 	color: blue;
 }
-span.error{
+
+span.error {
 	color: red;
+}
+
+ul li {
+	display: inline;
+	margin: 30px;
+	font-size: large;
+}
+
+.suchfeld {
+	min-width: 120px;
+	margin: 10px;
 }

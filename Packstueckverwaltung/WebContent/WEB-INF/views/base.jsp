@@ -14,13 +14,18 @@
 <body>
 	<header>
 		<hgroup>
-			<h1>Überschrift 1</h1>
-			<h3>weitere Überschrift</h3>
+			<h1>Packstückverwaltung</h1>
 		</hgroup>
 		<nav>
-			<h2>Menü:</h2>
 			<ul>
-				<li><a href="#">Home</a></li>
+				<li><a
+					href="<%=this.getServletContext().getContextPath()%>/login.html">Login</a></li>
+				<li><a
+					href="<%=this.getServletContext().getContextPath()%>/packstueckliste.html">Packstueckliste</a></li>
+					<li><a
+					href="<%=this.getServletContext().getContextPath()%>/lagerwegedaten.html">Lagerwegedaten</a></li>
+					<li><a
+					href="<%=this.getServletContext().getContextPath()%>/aenderungslog.html">Änderungslog</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -36,7 +41,8 @@
 	</section>
 	<footer>
 		<hr>
-		  <a href="https://github.com/ChristianBathe/Packstueckverwaltung">GitHub Quellcode</a>	
+		<a href="https://github.com/ChristianBathe/Packstueckverwaltung">GitHub
+			Quellcode</a>
 	</footer>
 </body>
 </html>

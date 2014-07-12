@@ -7,9 +7,12 @@ import packstueckverwaltung.model.Packstueck;
 
 public interface IPackstueckManager
 {
-	ArrayList<Packstueck> getAllPackstücke();
+	ArrayList<Packstueck> getAllPackstuecke();
 	public Packstueck getPackstückByBarcode(String barcode);
-	Packstueck deletePackstückByBarcode(String barcode);
-	void saveOrUpdatePackstück(Packstueck packstück);
+	ArrayList<Lagerwegdaten> getAllLagerwegdaten();
 	ArrayList<Lagerwegdaten> getLagerwegdatenByBarcode(String barcode);
+	public Packstueck deletePackstückById(int Id);
+	Lagerwegdaten deleteLagerwegdatenById(int Id);
+	void saveOrUpdatePackstück(Packstueck packstück);
+	void saveOrUpdateWegedaten(Lagerwegdaten lagerwegdaten);
 }

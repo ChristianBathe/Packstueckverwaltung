@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>FOM - Packstückverwaltung</title>
+<title>Insert title here</title>
 </head>
 <body>
-
+<!-- SIEHE ADD OR EDIT Person2 aus dem wp3 Projekt 
+ 	evtl. umbenennen in Insert -->
 </body>
 </html>

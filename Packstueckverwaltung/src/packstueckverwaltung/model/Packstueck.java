@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 public class Packstueck
 {
-	private int id;
+	private int id = Constants.NEW_DATA_SET_ID; //standardwert bei Neuanlage, wird bei Update/Insert Statement geprüft 
 	private String barcode;
 	private String kartonid;
 	private String lagernummer;
 	private String mandant;
-	private double istgewicht;
-	private double minimalgewicht;
-	private double maximalgewicht;
+	private String istgewicht;
+	private String minimalgewicht;
+	private String maximalgewicht;
 	private String lieferscheinnummer;
 	private String transportauftragsnummer;
-	private String trackingnummer;
 	private String versandart;
 	private String erstellungsdatum;
 	private String letztesupdate;
 	private String bearbeitungsstation; //PC, an dem das Packstück zuletzt bearbeitet wurde.
 	private String scandatum;
-	private int sapgebucht;
+	private int sapgebucht; //Reale Buchung des Packstückes --> Es hat das Lager verlassen und wird als Warenabgang erfasst.
 	private String buchungsdatum;	
+	private boolean manuellAngelegt;
 
 	private ArrayList<Lagerwegdaten> lagerwegdaten;
 	
@@ -65,27 +65,27 @@ public class Packstueck
 	{
 		this.mandant = mandant;
 	}
-	public double getIstgewicht()
+	public String getIstgewicht()
 	{
 		return istgewicht;
 	}
-	public void setIstgewicht(double istgewicht)
+	public void setIstgewicht(String istgewicht)
 	{
 		this.istgewicht = istgewicht;
 	}
-	public double getMinimalgewicht()
+	public String getMinimalgewicht()
 	{
 		return minimalgewicht;
 	}
-	public void setMinimalgewicht(double minimalgewicht)
+	public void setMinimalgewicht(String minimalgewicht)
 	{
 		this.minimalgewicht = minimalgewicht;
 	}
-	public double getMaximalgewicht()
+	public String getMaximalgewicht()
 	{
 		return maximalgewicht;
 	}
-	public void setMaximalgewicht(double maximalgewicht)
+	public void setMaximalgewicht(String maximalgewicht)
 	{
 		this.maximalgewicht = maximalgewicht;
 	}
@@ -104,14 +104,6 @@ public class Packstueck
 	public void setTransportauftragsnummer(String transportauftragsnummer)
 	{
 		this.transportauftragsnummer = transportauftragsnummer;
-	}
-	public String getTrackingnummer()
-	{
-		return trackingnummer;
-	}
-	public void setTrackingnummer(String trackingnummer)
-	{
-		this.trackingnummer = trackingnummer;
 	}
 	public String getVersandart()
 	{
@@ -176,7 +168,15 @@ public class Packstueck
 	public void setLagerwegdaten(ArrayList<Lagerwegdaten> lagerwegdaten)
 	{
 		this.lagerwegdaten = lagerwegdaten;
-	}			
+	}
+	public boolean isManuellAngelegt()
+	{
+		return manuellAngelegt;
+	}
+	public void setManuellAngelegt(boolean manuellAngelegt)
+	{
+		this.manuellAngelegt = manuellAngelegt;
+	}	
 }
 
 	
