@@ -16,15 +16,13 @@ public class Packstueck
 	private String transportauftragsnummer;
 	private String trackingnummer;
 	private String versandart;
-	private String abweichungsgrund; //Packstück wurde trotz einer abweichung gebucht	
 	private String erstellungsdatum;
 	private String letztesupdate;
-	private String bearbeitungsstation;
+	private String bearbeitungsstation; //PC, an dem das Packstück zuletzt bearbeitet wurde.
 	private String scandatum;
 	private int sapgebucht;
-	private String buchungsdatum;
-	
-	private ArrayList<Druckdaten> druckdaten;
+	private String buchungsdatum;	
+
 	private ArrayList<Lagerwegdaten> lagerwegdaten;
 	
 	public int getId()
@@ -123,14 +121,6 @@ public class Packstueck
 	{
 		this.versandart = versandart;
 	}
-	public String getAbweichungsgrund()
-	{
-		return abweichungsgrund;
-	}
-	public void setAbweichungsgrund(String abweichungsgrund)
-	{
-		this.abweichungsgrund = abweichungsgrund;
-	}
 	public String getErstellungsdatum()
 	{
 		return erstellungsdatum;
@@ -178,14 +168,6 @@ public class Packstueck
 	public void setBuchungsdatum(String buchungsdatum)
 	{
 		this.buchungsdatum = buchungsdatum;
-	}
-	public ArrayList<Druckdaten> getDruckdaten()
-	{
-		return druckdaten;
-	}
-	public void setDruckdaten(ArrayList<Druckdaten> druckdaten)
-	{
-		this.druckdaten = druckdaten;
 	}
 	public ArrayList<Lagerwegdaten> getLagerwegdaten()
 	{

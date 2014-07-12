@@ -20,7 +20,5 @@ public class Berechtigung
 	public void setBerechtigung(String berechtigung)
 	{
 		this.berechtigung = berechtigung;
-	}
-	
-	
+	}	
 }

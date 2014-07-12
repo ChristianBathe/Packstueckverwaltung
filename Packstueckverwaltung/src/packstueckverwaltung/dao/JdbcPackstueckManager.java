@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-
-import packstueckverwaltung.model.Berechtigung;
-import packstueckverwaltung.model.Druckdaten;
 import packstueckverwaltung.model.Lagerwegdaten;
 import packstueckverwaltung.model.Packstueck;
 
@@ -30,20 +26,13 @@ public class JdbcPackstueckManager implements IPackstueckManager
 		packstueck.setErstellungsdatum(rs.getString("Def_Time"));
 		packstueck.setIstgewicht(rs.getDouble("Ist_Gewicht"));
 		packstueck.setBarcode(rs.getString("Abweichungsgrund"));
-		packstueck.setBearbeitungsstation(rs.getString("BDC_Nummer"));
+		packstueck.setBearbeitungsstation(rs.getString("BDC_Nummer")); //PC, an dem das Packstück zuletzt bearbeitet wurde.
 		packstueck.setScandatum(rs.getString("Scandatum"));
 		packstueck.setSapgebucht(rs.getInt("SAP_Gemeldet"));
 		packstueck.setBuchungsdatum(rs.getString("SAP_Gemeldet_Datum"));
 		packstueck.setLieferscheinnummer(rs.getString("Vertriebsbelegnummer"));
 
 		return packstueck;
-	}
-
-	private Druckdaten loadDruckdatenFromResultSet(ResultSet resultSet) throws SQLException
-	{
-		Druckdaten druckdaten = new Druckdaten();
-
-		return druckdaten;
 	}
 
 	private Lagerwegdaten loadLagerwegdatenFromResultSet(ResultSet resultSet) throws SQLException
@@ -98,25 +87,7 @@ public class JdbcPackstueckManager implements IPackstueckManager
 		}
 		return null;
 	}
-	
-	@Override
-	public ArrayList<Druckdaten> getDruckdatenByBarcode(String barcode)
-	{
-		try (Connection c = DatabaseHelper.getInstance();)
-		{	
-			ResultSet rs = c.createStatement().executeQuery( "select * from ZARM_PRINT where bd_barcode = '" + barcode + "'");
 
-			if (rs != null && rs.next())
-			{
-				//return loadDruckdatenFromResultSet(rs);
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
 	
 	@Override
 	public ArrayList<Lagerwegdaten> getLagerwegdatenByBarcode(String barcode)
