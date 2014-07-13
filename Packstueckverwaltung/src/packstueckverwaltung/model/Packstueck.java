@@ -22,8 +22,6 @@ public class Packstueck
 	private int sapgebucht; //Reale Buchung des Packstückes --> Es hat das Lager verlassen und wird als Warenabgang erfasst.
 	private String buchungsdatum;	
 	private boolean manuellAngelegt;
-
-	private ArrayList<Lagerwegdaten> lagerwegdaten;
 	
 	public int getId()
 	{
@@ -160,14 +158,6 @@ public class Packstueck
 	public void setBuchungsdatum(String buchungsdatum)
 	{
 		this.buchungsdatum = buchungsdatum;
-	}
-	public ArrayList<Lagerwegdaten> getLagerwegdaten()
-	{
-		return lagerwegdaten;
-	}
-	public void setLagerwegdaten(ArrayList<Lagerwegdaten> lagerwegdaten)
-	{
-		this.lagerwegdaten = lagerwegdaten;
 	}
 	public boolean isManuellAngelegt()
 	{

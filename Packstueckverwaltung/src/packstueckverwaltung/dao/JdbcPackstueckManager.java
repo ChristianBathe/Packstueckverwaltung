@@ -34,11 +34,12 @@ public class JdbcPackstueckManager implements IPackstueckManager
 
 			packstueck.setIstgewicht(resultSet.getString("Ist_Gewicht"));
 
-			packstueck.setBearbeitungsstation(resultSet.getString("BDC_Nummer")); // PC, an dem das Packstück zuletzt bearbeitet wurde.
+			packstueck.setBearbeitungsstation(resultSet.getString("BDC_Nummer")); // PC, an dem das Packstueck zuletzt bearbeitet wurde.
 			packstueck.setScandatum(resultSet.getString("Scandatum"));
 			packstueck.setSapgebucht(resultSet.getInt("SAP_Gemeldet"));
 			packstueck.setBuchungsdatum(resultSet.getString("SAP_Gemeldet_Datum"));
 			packstueck.setLieferscheinnummer(resultSet.getString("Vertriebsbelegnummer"));
+			packstueck.setManuellAngelegt(resultSet.getBoolean("manuell_angelegt"));
 
 			return packstueck;
 		}
@@ -101,19 +102,45 @@ public class JdbcPackstueckManager implements IPackstueckManager
 		}
 		return null;
 	}
-
+	
 	@Override
-	public Packstueck getPackstückByBarcode(String barcode)
+	public Packstueck getPackstueckById(int id)
 	{
 		try (Connection c = DatabaseHelper.getInstance();)
 		{
 			ResultSet packstueckRs = c.createStatement().executeQuery(
-					"select * from ZARM_OUTBOUND where bd_barcode = '" + barcode + "'");
+					"select * from ZARM_OUTBOUND where lfd_nr_wa_daten = '" + id + "'");
 
 			if (packstueckRs != null && packstueckRs.next())
 			{
 				return loadPackstueckFromResultSet(packstueckRs);
 			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public ArrayList<Packstueck> getPackstueckByBarcode(String barcode)
+	{
+		try (Connection c = DatabaseHelper.getInstance();)
+		{
+			ArrayList<Packstueck> packstuecke = new ArrayList<Packstueck>();
+			
+			ResultSet packstueckRs = c.createStatement().executeQuery(
+					"select * from ZARM_OUTBOUND where bd_barcode = '" + barcode + "'");			
+
+			if (packstueckRs != null)
+			{
+				while (packstueckRs.next())
+				{
+					packstuecke.add(loadPackstueckFromResultSet(packstueckRs));
+				}
+			}
+			return packstuecke;
 		}
 		catch (Exception e)
 		{
@@ -176,7 +203,7 @@ public class JdbcPackstueckManager implements IPackstueckManager
 	}
 
 	@Override
-	public void saveOrUpdatePackstück(Packstueck packstueck)
+	public void saveOrUpdatePackstueck(Packstueck packstueck)
 	{
 		try (Connection c = DatabaseHelper.getInstance();)
 		{
@@ -192,20 +219,19 @@ public class JdbcPackstueckManager implements IPackstueckManager
 	public void saveOrUpdateWegedaten(Lagerwegdaten lagerwegdaten)
 	{
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
-	public Packstueck deletePackstückById(int id)
+	public Packstueck deletePackstueckById(int id)
 	{
 		try (Connection c = DatabaseHelper.getInstance();)
 		{
-			Packstueck packstueck = getPackstückById(id);
+			Packstueck packstueck = getPackstueckById(id);
 
 			if (packstueck != null)
 			{
-				String statement = "delete from ZARM_OUTBOUND where lfd_nr_wa_daten =" + id;
-				c.createStatement().executeQuery(statement);
+				String statement = "delete from ZARM_OUTBOUND where lfd_nr_wa_daten='" + id+ "'";
+				c.createStatement().executeUpdate(statement);
 			}
 			return packstueck;
 		}
@@ -225,8 +251,8 @@ public class JdbcPackstueckManager implements IPackstueckManager
 
 			if (lagerwegdaten != null)
 			{
-				String statement = "delete from ZARM_ROUTING where lfd_nr_wa_daten =" + id;
-				c.createStatement().executeQuery(statement);
+				String statement = "delete from ZARM_ROUTING where lfd_nr_wege_daten ='" + id+ "'";
+				c.createStatement().executeUpdate(statement);
 			}
 			return lagerwegdaten;
 		}
@@ -235,26 +261,7 @@ public class JdbcPackstueckManager implements IPackstueckManager
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	private Packstueck getPackstückById(int id)
-	{
-		try (Connection c = DatabaseHelper.getInstance();)
-		{
-			ResultSet packstueckRs = c.createStatement().executeQuery(
-					"select * from ZARM_OUTBOUND where lfd_nr_wa_daten = '" + id + "'");
-
-			if (packstueckRs != null && packstueckRs.next())
-			{
-				return loadPackstueckFromResultSet(packstueckRs);
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
+	}	
 
 	private Lagerwegdaten getLagerwegdatenById(int id)
 	{
@@ -288,17 +295,17 @@ public class JdbcPackstueckManager implements IPackstueckManager
 		if (packstueck.getId() == Constants.NEW_DATA_SET_ID)
 		{
 			pst = c.prepareStatement("INSERT INTO ZARM_OUTBOUND "
-					+ "(BD_Barcode,Lagernummer,Mandant ,Maxgewicht,Mingewicht ,TA_Nummer,Tracking_Nummer,Versandart,Mod_Time,Def_Time,Ist_Gewicht,BDC_Nummer ,Scandatum ,SAP_Gemeldet,SAP_Gemeldet_Datum,Vertriebsbelegnummer,KartonID) "
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?)");
+					+ "(BD_Barcode,Lagernummer,Mandant ,Maxgewicht,Mingewicht ,TA_Nummer,Versandart,Mod_Time,Def_Time,Ist_Gewicht,BDC_Nummer,SAP_Gemeldet,Vertriebsbelegnummer,KartonID, manuell_angelegt) "
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		}
-		// Nur manuell angelegt Packstücke dürfen komplett editiert werden!
-		if (packstueck.isManuellAngelegt())
+		// Nur manuell angelegt Packstuecke duerfen komplett editiert werden!
+		else if (packstueck.isManuellAngelegt())
 		{
-			pst = c.prepareStatement("UPDATE ZARM_OUTBOUND SET BD_Barcode=?,Lagernummer=?,Mandant=?,Maxgewicht=?,Mingewicht=?,TA_Nummer=?,Tracking_Nummer=?,Versandart=?,Mod_Time=?,Def_Time=?,Ist_Gewicht=?,BDC_Nummer=?,Scandatum=?,SAP_Gemeldet=?,SAP_Gemeldet_Datum=?,Vertriebsbelegnummer=?,KartonID=? WHERE id=?");
+			pst = c.prepareStatement("UPDATE ZARM_OUTBOUND SET BD_Barcode=?,Lagernummer=?,Mandant=?,Maxgewicht=?,Mingewicht=?,TA_Nummer=?,Versandart=?,Mod_Time=?,Def_Time=?,Ist_Gewicht=?,BDC_Nummer=?,Scandatum=?,SAP_Gemeldet=?,SAP_Gemeldet_Datum=?,Vertriebsbelegnummer=?,KartonID=? WHERE lfd_nr_wa_daten=?");
 		}
 		else
 		{
-			pst = c.prepareStatement("UPDATE ZARM_OUTBOUND SET Maxgewicht=?,Mingewicht=?,Versandart=?,Mod_Time=?,Ist_Gewicht=?,SAP_Gemeldet=?,KartonID=? WHERE id=?");
+			pst = c.prepareStatement("UPDATE ZARM_OUTBOUND SET Maxgewicht=?,Mingewicht=?,Versandart=?,Mod_Time=?,Ist_Gewicht=?,SAP_Gemeldet=?,KartonID=? WHERE lfd_nr_wa_daten=?");
 		}
 
 		pst = fillPackstueckPrepareStatementParameter(pst, packstueck);
@@ -310,7 +317,29 @@ public class JdbcPackstueckManager implements IPackstueckManager
 			throws SQLException
 	{
 		int counter = 1;
-		if (packstueck.isManuellAngelegt())
+		
+		if(packstueck.getId() == Constants.NEW_DATA_SET_ID)
+		{
+			//TODO erstellungszeiten usw. fuellen.
+			pst.setString(counter++, packstueck.getBarcode());
+			pst.setString(counter++, packstueck.getLagernummer());
+			pst.setString(counter++, packstueck.getMandant());
+			pst.setString(counter++, packstueck.getMaximalgewicht());
+			pst.setString(counter++, packstueck.getMinimalgewicht());
+			pst.setString(counter++, packstueck.getTransportauftragsnummer());
+			pst.setString(counter++, packstueck.getVersandart());
+			Date createdDate= new Date(System.currentTimeMillis());
+			pst.setTimestamp(counter++, new java.sql.Timestamp(createdDate.getTime())); // letztes Update
+			pst.setTimestamp(counter++, new java.sql.Timestamp(createdDate.getTime())); //Erstellungsdatum
+			
+			pst.setString(counter++, packstueck.getIstgewicht());
+			pst.setString(counter++, packstueck.getBearbeitungsstation());
+			pst.setInt(counter++, packstueck.getSapgebucht());
+			pst.setString(counter++, packstueck.getLieferscheinnummer());
+			pst.setString(counter++, packstueck.getKartonid());
+			pst.setBoolean(counter++, true); //manuell angelegt
+		}			
+		else if (packstueck.isManuellAngelegt())
 		{
 			pst.setString(counter++, packstueck.getBarcode());
 			pst.setString(counter++, packstueck.getLagernummer());
@@ -319,7 +348,9 @@ public class JdbcPackstueckManager implements IPackstueckManager
 			pst.setString(counter++, packstueck.getMinimalgewicht());
 			pst.setString(counter++, packstueck.getTransportauftragsnummer());
 			pst.setString(counter++, packstueck.getVersandart());
-			pst.setString(counter++, new Date().toString()); // letztes Update
+			
+			Date createdDate= new Date(System.currentTimeMillis());
+			pst.setTimestamp(counter++, new java.sql.Timestamp(createdDate.getTime())); // letztes Update
 			pst.setString(counter++, packstueck.getErstellungsdatum());
 			pst.setString(counter++, packstueck.getIstgewicht());
 			pst.setString(counter++, packstueck.getBearbeitungsstation());
@@ -328,16 +359,21 @@ public class JdbcPackstueckManager implements IPackstueckManager
 			pst.setString(counter++, packstueck.getBuchungsdatum());
 			pst.setString(counter++, packstueck.getLieferscheinnummer());
 			pst.setString(counter++, packstueck.getKartonid());
+			pst.setInt(counter++, packstueck.getId());
 		}
 		else
 		{
 			pst.setString(counter++, packstueck.getMaximalgewicht());
 			pst.setString(counter++, packstueck.getMinimalgewicht());
 			pst.setString(counter++, packstueck.getVersandart());
-			pst.setString(counter++, new Date().toString()); // letztes Update
+			
+			Date createdDate= new Date(System.currentTimeMillis());
+			pst.setTimestamp(counter++, new java.sql.Timestamp(createdDate.getTime())); // letztes Update
+			
 			pst.setString(counter++, packstueck.getIstgewicht());
 			pst.setInt(counter++, packstueck.getSapgebucht());
 			pst.setString(counter++, packstueck.getKartonid());
+			pst.setInt(counter++, packstueck.getId());
 		}
 
 		return pst;

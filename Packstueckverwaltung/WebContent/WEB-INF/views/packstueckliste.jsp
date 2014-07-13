@@ -2,13 +2,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <h2>Packstücke</h2>
 
-<div>
-	<a>Barcodefilter:</a>
-	<input class="suchfeld" id="barcodesuchfeld" type="text"> 
-	<input type="submit" name="barcodesuche" value="Suchen">
-</div>
-
-<a href="<c:url value="/updatepackstueck.html"/>">Packstueck hinzufügen</a>
+<form method="post">
+	<div>
+		<a>Barcodefilter:</a> 
+		<input class="suchfeld" name="barcodesuchfeld"
+			type="text" placeholder="Barcode eingeben"> 
+		<input type="submit" name="barcodesuche" value="Suchen">
+	</div>
+</form>
+<a href="<c:url value="/updatepackstueck.html"/>">Packstueck
+	hinzufügen</a>
 
 <table class="grid">
 	<tr>
@@ -51,11 +54,10 @@
 			<td><c:out value="${p.sapgebucht}" /></td>
 			<td><c:out value="${p.buchungsdatum}" /></td>
 			<td><c:out value="${p.manuellAngelegt}" /></td>
-			<td><a href="<c:url value="/profil2.html?id=${p.id}"/>"> <img
-					src="<c:url value="/images/edit.png"/>">
-			</a> <a href="<c:url value="/personloeschen.html?id=${p.id}"/>">
+			<td><a href="<c:url value="/updatepackstueck.html?id=${p.id}"/>">
+					<img src="<c:url value="/images/edit.png"/>">
+			</a> <a href="<c:url value="/deletepackstueck.html?id=${p.id}"/>">
 					löschen </a></td>
 		</tr>
 	</c:forEach>
 </table>
-<a href="<c:url value="/addpackstueck.html"/>">Packstück hinzufügen</a>
