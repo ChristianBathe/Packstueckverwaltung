@@ -23,7 +23,7 @@
 				<li><a
 					href="<%=this.getServletContext().getContextPath()%>/packstueckliste.html">Packstueckliste</a></li>
 					<li><a
-					href="<%=this.getServletContext().getContextPath()%>/lagerwegedaten.html">Lagerwegedaten</a></li>
+					href="<%=this.getServletContext().getContextPath()%>/lagerwegedatenliste.html">Lagerwegedaten</a></li>
 					<li><a
 					href="<%=this.getServletContext().getContextPath()%>/aenderungslog.html">Änderungslog</a></li>
 			</ul>

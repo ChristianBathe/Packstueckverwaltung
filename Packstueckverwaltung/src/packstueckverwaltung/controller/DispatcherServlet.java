@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import packstueckverwaltung.businesslogic.DaoHelper;
+import packstueckverwaltung.model.Lagerwegedaten;
+import packstueckverwaltung.model.LagerwegedatenForm;
 import packstueckverwaltung.model.Packstueck;
 import packstueckverwaltung.model.PackstueckForm;
 
@@ -49,6 +51,15 @@ public class DispatcherServlet extends HttpServlet
 				break;				
 			case "/deletepackstueck.html":
 				contentpage = deletePackstueck(request);
+				break;
+			case "/lagerwegedatenliste.html":
+				contentpage = lagerwegedatenlisteLaden(request);
+				break;
+			case "/updatelagerwegedaten.html":
+				contentpage = updateLagerwegedaten(request);
+				break;
+			case "/deletelagerwegedaten.html":
+				contentpage = deleteLagerwegedaten(request);
 				break;
 			default:
 				break;
@@ -107,7 +118,7 @@ public class DispatcherServlet extends HttpServlet
 	private String updatePackstueck(HttpServletRequest request)
 	{
 		//defaultwert um auf die liste zurückfallen
-		String contentpage = "packstueckliste";
+		String contentpage = "updatepackstueckcomplete";
 		PackstueckForm form = null;
 		
 		if (request.getParameter("id") != null)
@@ -160,6 +171,88 @@ public class DispatcherServlet extends HttpServlet
 		{
 			int id = Integer.valueOf(request.getParameter("id"));
 			Packstueck packstueck = DaoHelper.getPackstueckManager().deletePackstueckById(id);
+		}
+		
+		return contentpage;
+	}
+	
+	private String lagerwegedatenlisteLaden(HttpServletRequest request)
+	{
+		String contentpage;
+		contentpage = "lagerwegedatenliste";
+		
+		if(request.getParameter("barcodesuche") == null)
+		{
+			//Alle Daten abrufen
+			request.setAttribute("lagerwegedatenliste", DaoHelper.getPackstueckManager().getAllLagerwegdaten());
+		}
+		//Suchbutton wurde ausgeführt
+		else
+		{
+			String barcode = request.getParameter("barcodesuchfeld");
+			
+			if(barcode.equals("") || barcode.equals("*"))
+			{
+				//Alle Daten abrufen
+				request.setAttribute("lagerwegedatenliste", DaoHelper.getPackstueckManager().getAllLagerwegdaten());
+			}
+			else
+			{
+				//Gefilterte Daten abrufen
+				request.setAttribute("lagerwegedatenliste", DaoHelper.getPackstueckManager().getLagerwegdatenByBarcode(barcode));
+			}		
+		}
+		
+		return contentpage;
+	}
+	
+	private String updateLagerwegedaten(HttpServletRequest request)
+	{
+		//defaultwert um auf die liste zurückfallen
+		String contentpage = "updatelagerwegedaten";
+		LagerwegedatenForm form = null;
+		
+		if (request.getParameter("id") != null)
+		{
+			if (request.getParameter("saveaction") == null)
+			{
+				// editieren starten
+				int id = Integer.valueOf(request.getParameter("id"));
+				
+				Lagerwegedaten lagerwegedaten = DaoHelper.getPackstueckManager().getLagerwegedatenById(id);
+				
+				contentpage = "updatelagerwegedaten";
+				
+				//Form mit den entsprechenden vorbelegten Packstückdaten laden
+				form = new LagerwegedatenForm(lagerwegedaten, request);
+			}
+			// Speichern-Button auf der Packstueckform wurde geklickt --> speichern/updaten
+			else
+			{				
+				form = new LagerwegedatenForm(request);
+				Lagerwegedaten lagerwegedaten = new Lagerwegedaten();
+				form.validate(lagerwegedaten, request);
+				DaoHelper.getPackstueckManager().saveOrUpdateLagerwegedaten(lagerwegedaten);
+			}
+		}
+		else
+		{
+			// neues Packstück anlegen
+			form = new LagerwegedatenForm();
+		}
+		request.setAttribute("form", form);
+		return contentpage;
+	}
+	
+	private String deleteLagerwegedaten(HttpServletRequest request)
+	{
+		String contentpage;
+		contentpage = "lagerwegedatenliste";
+		
+		if (request.getParameter("id") != null)
+		{
+			int id = Integer.valueOf(request.getParameter("id"));
+			Lagerwegedaten lagerwegedaten = DaoHelper.getPackstueckManager().deleteLagerwegedatenById(id);
 		}
 		
 		return contentpage;

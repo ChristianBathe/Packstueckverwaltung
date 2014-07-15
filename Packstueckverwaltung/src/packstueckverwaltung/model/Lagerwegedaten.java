@@ -1,13 +1,11 @@
 package packstueckverwaltung.model;
 
-public class Lagerwegdaten
-{
-	
+public class Lagerwegedaten
+{	
 	private int id = Constants.NEW_DATA_SET_ID; //standardwert bei Neuanlage, wird bei Update/Insert Statement geprüft 
 	private String barcode;
 	private String kartonid;
-	private String laufendenummer;
-	private String wegeId; //Richtungscode wohin das Packstück geschleust werden soll
+	private String wegeid;//Richtungscode wohin das Packstück geschleust werden soll
 	private String erstellungsdatum;
 	private String letztesupdate;
 	private String wegpunkt; //Punkt/Station im Lager, auf den sich die Weginformation bezieht
@@ -36,22 +34,14 @@ public class Lagerwegdaten
 	public void setKartonid(String kartonid)
 	{
 		this.kartonid = kartonid;
+	}		
+	public String getWegeid()
+	{
+		return wegeid;
 	}
-	public String getLaufendenummer()
+	public void setWegeid(String wegeid)
 	{
-		return laufendenummer;
-	}
-	public void setLaufendenummer(String laufendenummer)
-	{
-		this.laufendenummer = laufendenummer;
-	}	
-	public String getWegeId()
-	{
-		return wegeId;
-	}
-	public void setWegeId(String wegeId)
-	{
-		this.wegeId = wegeId;
+		this.wegeid = wegeid;
 	}
 	public String getErstellungsdatum()
 	{
