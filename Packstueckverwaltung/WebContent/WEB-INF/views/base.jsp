@@ -7,9 +7,9 @@
 <title>FOM - Packstückverwaltung</title>
 <meta name="description" content="">
 <link rel="stylesheet"
-	href="<%=this.getServletContext().getContextPath()%>/css/style.css">
-<script type="text/javascript"
-	src="<%=this.getServletContext().getContextPath()%>/js/wp.js"></script>
+	href="<%=this.getServletContext().getContextPath()%>/css/style.css">	
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 <body>
 	<header>

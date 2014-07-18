@@ -71,7 +71,15 @@ public class DispatcherServlet extends HttpServlet
 		if (contentpage != null)
 		{
 			request.setAttribute("contentpage", contentpage);
-			request.getRequestDispatcher("/WEB-INF/views/base.jsp").forward(request, response);
+
+			if (contentpage != "reportliste")
+			{
+				request.getRequestDispatcher("/WEB-INF/views/base.jsp").forward(request, response);
+			}
+			else
+			{
+				request.getRequestDispatcher("/WEB-INF/views/" + contentpage + ".jsp").forward(request, response);
+			}
 		}
 		else
 		{
@@ -267,8 +275,7 @@ public class DispatcherServlet extends HttpServlet
 
 	private String deleteLagerwegedaten(HttpServletRequest request)
 	{
-		String contentpage;
-		contentpage = "lagerwegedatenliste";
+		String contentpage = "lagerwegedatenliste";
 
 		if (request.getParameter("id") != null)
 		{
@@ -281,17 +288,19 @@ public class DispatcherServlet extends HttpServlet
 
 	private String reportlisteLaden(HttpServletRequest request)
 	{
-		String contentpage = "reportliste";
+		String contentpage = "reportliste_master";
 
-		if (request.getParameter("barcodesuche") == null)
+		if (request.getParameter("barcodesuchfeld") == null)
 		{
 			// Alle Daten abrufen
 			request.setAttribute("reportliste", DaoHelper.getReportManager().getAllReport());
+
 		}
 		// Suchbutton wurde ausgeführt
 		else
 		{
 			String barcode = request.getParameter("barcodesuchfeld");
+			contentpage = "reportliste";
 
 			if (barcode.equals("") || barcode.equals("*"))
 			{
@@ -307,5 +316,4 @@ public class DispatcherServlet extends HttpServlet
 
 		return contentpage;
 	}
-
 }
