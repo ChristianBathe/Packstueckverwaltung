@@ -19,6 +19,10 @@
 		<th>Gebucht</th>
 		<th>Buchungsdatum</th>
 		<th>Manuell</th>
+		<c:if test="${sessionScope.schreibrecht eq true}">
+			<th>Editieren</th>
+			<th>Löschen</th>
+		</c:if>
 	</tr>
 	<c:forEach items="${packstueckliste}" var="p">
 		<tr>
@@ -43,10 +47,12 @@
 			<!-- Nur bei Schreibrechten einblenden -->
 			<c:if test="${sessionScope.schreibrecht eq true}">
 				<td><a
-					href="<c:url value="/updatepackstueck.html?id=${p.id}"/>"> <img
-						src="<c:url value="/images/edit.png"/>">
-				</a> <a href="<c:url value="/deletepackstueck.html?id=${p.id}"/>">
-						löschen </a></td>
+					href="<c:url value="/updatepackstueck.html?id=${p.id}"/>"> 
+					<img src="<c:url value="/images/table_edit.png"/>">
+				</a></td>
+				<td><a
+					href="<c:url value="/deletepackstueck.html?id=${p.id}"/>">
+						<img src="<c:url value="/images/cross.png"/>">  </a></td>
 			</c:if>
 		</tr>
 	</c:forEach>

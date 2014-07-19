@@ -23,9 +23,10 @@ public class PackstueckForm
 	private String erstellungsdatum;
 	private boolean manuellAngelegt;
 
+	// Für neu angelegte Packstücke
 	public PackstueckForm()
 	{
-
+		manuellAngelegt = true;
 	}
 
 	public PackstueckForm(HttpServletRequest request)

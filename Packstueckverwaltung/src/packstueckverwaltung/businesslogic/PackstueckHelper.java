@@ -42,7 +42,7 @@ public class PackstueckHelper
 	public static String updatePackstueck(HttpServletRequest request)
 	{
 		// defaultwert um auf die liste zurückfallen
-		String contentpage = "updatepackstueckcomplete";
+		String contentpage = "updatepackstueck";
 		PackstueckForm form = null;
 
 		if (request.getParameter("id") != null)
@@ -55,15 +55,14 @@ public class PackstueckHelper
 				Packstueck packstueck = DaoHelper.getPackstueckManager().getPackstueckById(id);
 				request.getSession().setAttribute("old_values", packstueck.getAllFieldsToString());
 
-				// TODO Userberechtigung prüfen
 				// Nur manuell angelegte Packstücke können komplett bearbeitet werden
 				if (packstueck.isManuellAngelegt())
 				{
-					contentpage = "updatepackstueckcomplete";
+					request.getSession().setAttribute("bearbeitungsmodus", "complete");
 				}
 				else
 				{
-					contentpage = "updatepackstueckreduced";
+					request.getSession().setAttribute("bearbeitungsmodus", "reduced");
 				}
 
 				// Form mit den entsprechenden vorbelegten Packstückdaten laden
@@ -90,6 +89,7 @@ public class PackstueckHelper
 		{
 			// neues Packstück anlegen
 			form = new PackstueckForm();
+			request.getSession().setAttribute("bearbeitungsmodus", "complete");
 		}
 		request.setAttribute("form", form);
 		return contentpage;
