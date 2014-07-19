@@ -20,8 +20,6 @@ public class DispatcherServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 
-	// private Logger logger = Logger.getLogger(DispatcherServlet.class);
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

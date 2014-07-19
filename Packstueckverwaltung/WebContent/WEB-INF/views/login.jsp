@@ -11,21 +11,21 @@
 
 <body>
 	<form method="post"
-		action="<%=this.getServletContext().getContextPath()%>/LoginServlet">
-		<span class="error">${global_error}</span>
+		action="<%=this.getServletContext().getContextPath()%>/LoginServlet">		
 		<table>
 			<tr>
-				<td>E-Mail:</td>
-				<td><input type="email" name="email" id="email"
+				<td><a>E-Mail:</a></td>
+				<td><input type="email" name="email" id="email" class="loginInput"
 					autocomplete="off" placeholder="E-Mail eingeben"></td>
 			</tr>
 			<tr>
-				<td>Passwort:</td>
-				<td><input type="password" name="passwort" id="passwort"
+				<td><a>Passwort:</a></td>
+				<td><input type="password" name="passwort" id="passwort" class="loginInput"
 					placeholder="Passwort eingeben"></td>
+					
 			</tr>
 		</table>
-		<input type="submit" name="login" value="login">
+		<input type="submit" name="login" value="login" class="addbutton">
 	</form>
 </body>
 </html>

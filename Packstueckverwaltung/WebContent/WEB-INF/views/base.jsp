@@ -7,7 +7,7 @@
 <title>FOM - Packstückverwaltung</title>
 <meta name="description" content="">
 <link rel="stylesheet"
-	href="<%=this.getServletContext().getContextPath()%>/css/style.css">	
+	href="<%=this.getServletContext().getContextPath()%>/css/style.css">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 </head>
@@ -22,21 +22,16 @@
 					href="<%=this.getServletContext().getContextPath()%>/login.html">Login</a></li>
 				<li><a
 					href="<%=this.getServletContext().getContextPath()%>/packstueckliste.html">Packstueckliste</a></li>
-					<li><a
+				<li><a
 					href="<%=this.getServletContext().getContextPath()%>/lagerwegedatenliste.html">Lagerwegedaten</a></li>
-					<li><a
+				<li><a
 					href="<%=this.getServletContext().getContextPath()%>/reportliste.html">Änderungslog</a></li>
 			</ul>
 		</nav>
 	</header>
 	<section>
-		<%
-			if (request.getSession().getAttribute("global_message") != null)
-			{
-				out.write("<p class=\"message\">" + request.getSession().getAttribute("global_message") + "</p>");
-				request.getSession().removeAttribute("global_message");
-			}
-		%>
+	 <span class="error">${global_error}</span>
+
 		<jsp:include page="/WEB-INF/views/${contentpage}.jsp"></jsp:include>
 	</section>
 	<footer>

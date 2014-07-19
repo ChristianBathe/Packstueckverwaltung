@@ -1,18 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2>Packstücke</h2>
-
-<div>
+<div class="success">${global_message}</div>
+<div class="filterDiv">
 	<a>Barcodefilter:</a> <input class="suchfeld" id="barcodesuchfeld"
-		type="text" placeholder="Barcode eingeben"> <input
-		type="submit" value="Suchen"
+		type="text" placeholder="Barcode eingeben"> 
+		<input
+		type="submit" value="Suchen" class="addbutton"
 		onclick='jqueryAjaxRequest("packstueckliste.html")'>
+
+	<!-- Nur bei Schreibrechten einblenden -->
+	<c:if test="${sessionScope.schreibrecht eq true}">
+		<input type="button"
+			onclick="window.location='/Packstueckverwaltung/updatepackstueck.html'"
+			value="Packstück hinzufügen" class="addbutton">
+	</c:if>
 </div>
 
-<!-- Nur bei Schreibrechten einblenden -->
-<c:if test="${sessionScope.schreibrecht eq true}">
-	<a href="<c:url value="/updatepackstueck.html"/>">Packstueck
-		hinzufügen</a>
-</c:if>
+
 
 <jsp:include page="packstuecklisteTabelle.jsp" />
 

@@ -44,17 +44,17 @@
 		</tr>
 		<tr>
 			<td>Istgewicht:</td>
-			<td><input type="number" name="istgewicht"
+			<td><input type="number" name="istgewicht" step="any" min="0
 				value="${form.istgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Minimalgewicht:</td>
-			<td><input type="number" name="minimalgewicht"
+			<td><input type="number" name="minimalgewicht" step="any" min="0"
 				value="${form.minimalgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Maximalgewicht:</td>
-			<td><input type="number" name="maximalgewicht"
+			<td><input type="number" name="maximalgewicht" step="any" min="0
 				value="${form.maximalgewicht}"></td>
 		</tr>
 		<tr>

@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<div class="tableDiv">
 <!-- Wichtig ist hier die id der Tabelle. Darüber wird die Tabelle im JQuery erkannt und aktualisiert -->
 <table class="grid" id="reportTable">
 	<tr>
@@ -21,3 +23,4 @@
 		</tr>
 	</c:forEach>
 </table>
+</div>

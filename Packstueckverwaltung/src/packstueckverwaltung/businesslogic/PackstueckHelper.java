@@ -52,7 +52,10 @@ public class PackstueckHelper
 				// editieren starten
 				int id = Integer.valueOf(request.getParameter("id"));
 
+				// Packstück aus der DB abfragen
 				Packstueck packstueck = DaoHelper.getPackstueckManager().getPackstueckById(id);
+
+				// Alte Daten an die Session speichern, um Änderungen nachverfolgen zu können
 				request.getSession().setAttribute("old_values", packstueck.getAllFieldsToString());
 
 				// Nur manuell angelegte Packstücke können komplett bearbeitet werden
@@ -77,12 +80,19 @@ public class PackstueckHelper
 				DaoHelper.getPackstueckManager().saveOrUpdatePackstueck(packstueck);
 
 				// Änderungslog anlegen
-				String alteDaten = request.getSession().getAttribute("old_values").toString();
+				String alteDaten = (String) request.getSession().getAttribute("old_values");
+				if (alteDaten == null)
+					alteDaten = "Daten wurden neu angelegt";
 				String neueDaten = packstueck.getAllFieldsToString();
 				Benutzer user = (Benutzer) request.getSession().getAttribute("session_person");
 
 				DaoHelper.getReportManager().insertReport(user.getEmail(), alteDaten, neueDaten,
 						packstueck.getBarcode());
+
+				request.getSession().setAttribute("global_message", "Daten erfolgreich gespeichert");
+
+				// Wieder zurück zur Liste navigieren
+				return packstuecklisteladen(request);
 			}
 		}
 		else
@@ -97,14 +107,13 @@ public class PackstueckHelper
 
 	public static String deletePackstueck(HttpServletRequest request)
 	{
-		String contentpage = "packstuecklisteTabelle";
-
 		if (request.getParameter("id") != null)
 		{
 			int id = Integer.valueOf(request.getParameter("id"));
 			DaoHelper.getPackstueckManager().deletePackstueckById(id);
 		}
 
-		return contentpage;
+		// Wieder zurück zur Liste navigieren
+		return packstuecklisteladen(request);
 	}
 }

@@ -1,18 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2>Lagerwegedaten</h2>
-
-<div>
+<div class="success">${global_message}</div>
+<div class="filterDiv">
 	<a>Barcodefilter:</a> <input class="suchfeld" id="barcodesuchfeld"
-		type="text" placeholder="Barcode eingeben"> 
-		<input type="submit" name="barcodesuche" value="Suchen"
+		type="text" placeholder="Barcode eingeben"> <input
+		type="submit" name="barcodesuche" value="Suchen" class="addbutton"
 		onclick='jqueryAjaxRequest("lagerwegedatenliste.html")'>
+
+	<!-- Nur bei Schreibrechten einblenden -->
+	<c:if test="${sessionScope.schreibrecht eq true}">
+		<input type="button"
+			onclick="window.location='/Packstueckverwaltung//updatelagerwegedaten.html'"
+			value="Packstück hinzufügen" class="addbutton">
+	</c:if>
 </div>
 
-<!-- Nur bei Schreibrechten einblenden -->
-<c:if test="${sessionScope.schreibrecht eq true}">
-	<a href="<c:url value="/updatelagerwegedaten.html"/>">Wegdaten
-		hinzufügen</a>
-</c:if>
+
 
 <jsp:include page="lagerwegedatenlisteTabelle.jsp" />
 

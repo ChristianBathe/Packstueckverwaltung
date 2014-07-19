@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="grid">
+<div class="tableDiv"> 
+<!-- Wichtig ist hier die id der Tabelle. Darüber wird die Tabelle im JQuery erkannt und aktualisiert -->
 	<table id="lagerwegedatenTable">
 		<tr>
 			<th>ID</th>

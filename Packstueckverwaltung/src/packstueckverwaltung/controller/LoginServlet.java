@@ -46,18 +46,20 @@ public class LoginServlet extends HttpServlet
 	{
 		Benutzer nutzer = DaoHelper.getBenutzerManager().getBenutzerByEmail(request.getParameter("email"));
 
-		// Prüfen, ob Daten gefunden wurden und falls ja, ob das eingegebene Passwort stimmt
+		// Prüfen, ob Daten gefunden wurden und falls ja, ob das eingegebene Passwort stimmt. Anso
 		if (nutzer != null && request.getParameter("passwort").equals(nutzer.getPasswort()))
 		{
 			// zugehörigen Rechte des Nutzers abfragen
 			ArrayList<Berechtigung> berechtigungen = DaoHelper.getBenutzerManager().getBenutzerRechte(nutzer.getId());
 			nutzer.setBerechtigungen(berechtigungen);
 
+			// Rechte des Nutzer standardmäßig auf lesen beschränken --> schreibrecht = false
 			request.getSession().setAttribute("schreibrecht", false);
 			for (Berechtigung berechtigung : berechtigungen)
 			{
 				if (berechtigung.getBerechtigung().equals(Constants.SCHREIB_BERECHTIGUNG))
 				{
+					// Hat der Nutzer die entsprechende Berechtigung, darf er Daten anlegen, editieren und löschen.
 					request.getSession().setAttribute("schreibrecht", true);
 					break;
 				}
@@ -67,13 +69,15 @@ public class LoginServlet extends HttpServlet
 			request.getSession().setAttribute("global_message",
 					"Willkommen: " + nutzer.getVorname() + " " + nutzer.getNachname());
 
-			// Auf Startseite weiterleiten
-			response.sendRedirect(request.getContextPath() + "/index.html");
+			// Fehlermeldung zurücksetzen
+			request.getSession().setAttribute("global_error", "");
 		}
+
 		else
 		{
 			request.getSession().setAttribute("global_error", "E-Mail/Passwort Kombination nicht bekannt");
-			request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
 		}
+		// Auf Startseite weiterleiten
+		response.sendRedirect(request.getContextPath() + "/index.html");
 	}
 }
