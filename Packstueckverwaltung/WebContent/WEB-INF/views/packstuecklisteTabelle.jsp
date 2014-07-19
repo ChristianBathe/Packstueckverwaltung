@@ -1,19 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<h2>Packstücke</h2>
-
-<form method="post">
-	<div>
-		<a>Barcodefilter:</a> 
-		<input class="suchfeld" name="barcodesuchfeld"
-			type="text" placeholder="Barcode eingeben"> 
-		<input type="submit" name="barcodesuche" value="Suchen">
-	</div>
-</form>
-<a href="<c:url value="/updatepackstueck.html"/>">Packstueck
-	hinzufügen</a>
-
-<table class="grid">
+<table class="grid" id="packstueckTable">
 	<tr>
 		<th>ID</th>
 		<th>Barcode</th>
@@ -54,10 +40,14 @@
 			<td><c:out value="${p.sapgebucht}" /></td>
 			<td><c:out value="${p.buchungsdatum}" /></td>
 			<td><c:out value="${p.manuellAngelegt}" /></td>
-			<td><a href="<c:url value="/updatepackstueck.html?id=${p.id}"/>">
-					<img src="<c:url value="/images/edit.png"/>">
-			</a> <a href="<c:url value="/deletepackstueck.html?id=${p.id}"/>">
-					löschen </a></td>
+			<!-- Nur bei Schreibrechten einblenden -->
+			<c:if test="${sessionScope.schreibrecht eq true}">
+				<td><a
+					href="<c:url value="/updatepackstueck.html?id=${p.id}"/>"> <img
+						src="<c:url value="/images/edit.png"/>">
+				</a> <a href="<c:url value="/deletepackstueck.html?id=${p.id}"/>">
+						löschen </a></td>
+			</c:if>
 		</tr>
 	</c:forEach>
 </table>

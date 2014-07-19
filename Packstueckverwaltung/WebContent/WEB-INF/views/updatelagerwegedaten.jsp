@@ -43,7 +43,6 @@
 			<td><input type="text" name="letztesupdate"
 				value="${form.letztesupdate}" readonly="readonly"></td>
 		</tr>
-		</tr>
 		<tr>
 			<td>Erstellungsdatum:</td>
 			<td><input type="text" name="erstellungsdatum"

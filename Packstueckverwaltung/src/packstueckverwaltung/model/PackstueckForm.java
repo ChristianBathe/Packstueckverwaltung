@@ -49,11 +49,13 @@ public class PackstueckForm
 		manuellAngelegt = Boolean.parseBoolean(request.getParameter("manuellAngelegt"));
 	}
 
-	public PackstueckForm(Packstueck packstueck, HttpServletRequest request) {
-		if (packstueck.getId() != Constants.NEW_DATA_SET_ID) {
+	public PackstueckForm(Packstueck packstueck, HttpServletRequest request)
+	{
+		if (packstueck.getId() != Constants.NEW_DATA_SET_ID)
+		{
 			id = packstueck.getId();
 		}
-		
+
 		barcode = packstueck.getBarcode();
 		kartonid = packstueck.getKartonid();
 		lagernummer = packstueck.getLagernummer();
@@ -72,9 +74,10 @@ public class PackstueckForm
 		erstellungsdatum = packstueck.getErstellungsdatum();
 		manuellAngelegt = packstueck.isManuellAngelegt();
 	}
-	
-	public void validate(Packstueck packstueck, HttpServletRequest request) {
-	
+
+	public void validate(Packstueck packstueck, HttpServletRequest request)
+	{
+
 		packstueck.setId(id);
 		packstueck.setBarcode(barcode);
 		packstueck.setBearbeitungsstation(bearbeitungsstation);
@@ -92,7 +95,7 @@ public class PackstueckForm
 		packstueck.setSapgebucht(sapgebucht);
 		packstueck.setScandatum(scandatum);
 		packstueck.setTransportauftragsnummer(transportauftragsnummer);
-		packstueck.setVersandart(versandart);		
+		packstueck.setVersandart(versandart);
 	}
 
 	public int getId()
@@ -273,6 +276,6 @@ public class PackstueckForm
 	public void setManuellAngelegt(boolean manuellAngelegt)
 	{
 		this.manuellAngelegt = manuellAngelegt;
-	}	
-	
+	}
+
 }

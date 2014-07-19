@@ -1,8 +1,8 @@
 <%@page import="packstueckverwaltung.model.Gebucht"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <form action="<c:url value="/updatepackstueck.html"/>" method="post">
-<input type="hidden" name="id" value="${form.id}">
-	
+	<input type="hidden" name="id" value="${form.id}">
+
 	<table>
 		<tr>
 			<td>Gebucht:</td>
@@ -35,65 +35,71 @@
 			<td><input type="text" name="lagernummer"
 				value="${form.lagernummer}"></td>
 		</tr>
-		 <tr>
+		<tr>
 			<td>Mandant:</td>
 			<td><input type="text" name="mandant" value="${form.mandant}"></td>
 		</tr>
 		<tr>
 			<td>Istgewicht:</td>
-			<td><input type="text" name="istgewicht"
+			<td><input type="number" name="istgewicht"
 				value="${form.istgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Minimalgewicht:</td>
-			<td><input type="text" name="minimalgewicht" value="${form.minimalgewicht}"></td>
+			<td><input type="text" name="minimalgewicht"
+				value="${form.minimalgewicht}"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Maximalgewicht:</td>
-			<td><input type="text" name="maximalgewicht" value="${form.maximalgewicht}"></td>
+			<td><input type="text" name="maximalgewicht"
+				value="${form.maximalgewicht}"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Lieferscheinnummer:</td>
-			<td><input type="text" name="lieferscheinnummer" value="${form.lieferscheinnummer}"></td>
+			<td><input type="text" name="lieferscheinnummer"
+				value="${form.lieferscheinnummer}"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Transportauftragsnummer:</td>
-			<td><input type="text" name="transportauftragsnummer" value="${form.transportauftragsnummer}"></td>
+			<td><input type="text" name="transportauftragsnummer"
+				value="${form.transportauftragsnummer}"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Versandart:</td>
-			<td><input type="text" name="versandart" value="${form.versandart}"></td>
+			<td><input type="text" name="versandart"
+				value="${form.versandart}"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Bearbeitungsstation:</td>
-			<td><input type="text" name="bearbeitungsstation" value="${form.bearbeitungsstation}"></td>
+			<td><input type="text" name="bearbeitungsstation"
+				value="${form.bearbeitungsstation}"></td>
 		</tr>
-		</tr>
-			<tr>
+		<tr>
 			<td>Letztesupdate:</td>
-			<td><input type="text" name="letztesupdate" value="${form.letztesupdate}" readonly="readonly"></td>
-		</tr>		
+			<td><input type="text" name="letztesupdate"
+				value="${form.letztesupdate}" readonly="readonly"></td>
 		</tr>
-			<tr>
+		<tr>
 			<td>Buchungsdatum:</td>
-			<td><input type="text" name="buchungsdatum" value="${form.buchungsdatum}" readonly="readonly"></td>
+			<td><input type="text" name="buchungsdatum"
+				value="${form.buchungsdatum}" readonly="readonly"></td>
 		</tr>
-		</tr>
-			<tr>
+		<tr>
 			<td>Scandatum:</td>
-			<td><input type="text" name="scandatum" value="${form.scandatum}" readonly="readonly"></td>
+			<td><input type="text" name="scandatum"
+				value="${form.scandatum}" readonly="readonly"></td>
 		</tr>
-		</tr>
-			<tr>
+		<tr>
 			<td>Erstellungsdatum:</td>
-			<td><input type="text" name="erstellungsdatum" value="${form.erstellungsdatum}" readonly="readonly"></td>
+			<td><input type="text" name="erstellungsdatum"
+				value="${form.erstellungsdatum}" readonly="readonly"></td>
 		</tr>
-		</tr>
-			<tr>
+		<tr>
 			<td>ManuellAngelegt:</td>
-			<td><label name="manuellAngelegt" value="${form.manuellAngelegt}" readonly="readonly"></td>
+			<td><input name="manuellAngelegt"
+				value="${form.manuellAngelegt}" readonly="readonly"></td>
 		</tr>
-		
+
 	</table>
 	<input type="submit" name="saveaction" value="speichern">
 </form>

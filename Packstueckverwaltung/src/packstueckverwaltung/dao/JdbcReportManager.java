@@ -89,6 +89,7 @@ public class JdbcReportManager implements IReportManager
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void insertReport(String userEmail, String alteDaten, String neueDaten, String barcode)
 	{
