@@ -76,8 +76,10 @@ public class LoginServlet extends HttpServlet
 		else
 		{
 			request.getSession().setAttribute("global_error", "E-Mail/Passwort Kombination nicht bekannt");
+			// Nutzer aus der Session löschen, für den Fall, dass er vorher angemeldet war.
+			request.getSession().setAttribute("session_person", null);
 		}
 		// Auf Startseite weiterleiten
-		response.sendRedirect(request.getContextPath() + "/index.html");
+		response.sendRedirect(request.getContextPath() + "/packstueckliste.html");
 	}
 }

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2>Änderungsverfolgung</h2>
-<div class="success">${global_message}</div>
+
 <div class="filterDiv">
 	<a>Barcodefilter:</a> <input class="suchfeld" id="barcodesuchfeld"
 		name="barcodesuchfeld" type="text" placeholder="Barcode eingeben">

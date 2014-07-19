@@ -74,25 +74,7 @@ public class PackstueckHelper
 			// Speichern-Button auf der Packstueckform wurde geklickt --> speichern/updaten
 			else
 			{
-				form = new PackstueckForm(request);
-				Packstueck packstueck = new Packstueck();
-				form.validate(packstueck, request);
-				DaoHelper.getPackstueckManager().saveOrUpdatePackstueck(packstueck);
-
-				// Änderungslog anlegen
-				String alteDaten = (String) request.getSession().getAttribute("old_values");
-				if (alteDaten == null)
-					alteDaten = "Daten wurden neu angelegt";
-				String neueDaten = packstueck.getAllFieldsToString();
-				Benutzer user = (Benutzer) request.getSession().getAttribute("session_person");
-
-				DaoHelper.getReportManager().insertReport(user.getEmail(), alteDaten, neueDaten,
-						packstueck.getBarcode());
-
-				request.getSession().setAttribute("global_message", "Daten erfolgreich gespeichert");
-
-				// Wieder zurück zur Liste navigieren
-				return packstuecklisteladen(request);
+				return saveDataToDatabase(request);
 			}
 		}
 		else
@@ -105,6 +87,35 @@ public class PackstueckHelper
 		return contentpage;
 	}
 
+	private static String saveDataToDatabase(HttpServletRequest request)
+	{
+		PackstueckForm form = new PackstueckForm(request);
+		Packstueck packstueck = new Packstueck();
+		form.validate(packstueck, request);
+
+		// Update/Insert versuchen. Wenn es nicht klappt, wird eine Fehlermeldung ausgegeben
+		if (DaoHelper.getPackstueckManager().saveOrUpdatePackstueck(packstueck))
+		{
+			// Änderungslog anlegen
+			String alteDaten = (String) request.getSession().getAttribute("old_values");
+			if (alteDaten == null)
+				alteDaten = "Daten wurden neu angelegt";
+			String neueDaten = packstueck.getAllFieldsToString();
+			Benutzer user = (Benutzer) request.getSession().getAttribute("session_person");
+
+			DaoHelper.getReportManager().insertReport(user.getEmail(), alteDaten, neueDaten, packstueck.getBarcode());
+
+			request.getSession().setAttribute("global_message", "Daten erfolgreich gespeichert");
+		}
+		else
+		{
+			request.getSession().setAttribute("global_error", "Fehler beim Speichern der Daten!");
+		}
+
+		// Wieder zurück zur Liste navigieren
+		return packstuecklisteladen(request);
+	}
+
 	public static String deletePackstueck(HttpServletRequest request)
 	{
 		if (request.getParameter("id") != null)
@@ -112,6 +123,8 @@ public class PackstueckHelper
 			int id = Integer.valueOf(request.getParameter("id"));
 			DaoHelper.getPackstueckManager().deletePackstueckById(id);
 		}
+
+		request.getSession().setAttribute("global_message", "Datensatz wurde gelöscht!");
 
 		// Wieder zurück zur Liste navigieren
 		return packstuecklisteladen(request);

@@ -1,10 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <h2>Packstücke</h2>
-<div class="success">${global_message}</div>
+<!-- Für erfolgreiches Speichern der Daten -->
+<c:if test="${not empty global_message}">
+	<div class="success">${global_message}</div>
+</c:if>
+<!-- Für Fehlermeldungen -->
+<c:if test="${not empty global_error}">
+	<div class="error">${global_error}</div>
+</c:if>
+
 <div class="filterDiv">
 	<a>Barcodefilter:</a> <input class="suchfeld" id="barcodesuchfeld"
-		type="text" placeholder="Barcode eingeben"> 
-		<input
+		type="text" placeholder="Barcode eingeben"> <input
 		type="submit" value="Suchen" class="addbutton"
 		onclick='jqueryAjaxRequest("packstueckliste.html")'>
 

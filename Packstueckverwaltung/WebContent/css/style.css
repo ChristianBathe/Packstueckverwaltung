@@ -1,6 +1,7 @@
 html {
 	height: 100%;
 }
+
 body {
 	margin-left: 30px;
 	margin-right: 30px;
@@ -13,14 +14,13 @@ header {
 	margin-bottom: 50px;
 }
 
-h1, h2{
+h1,h2 {
 	color: #6495ED;
 	font-family: sans-serif, cursive;
 	font-weight: bold;
 }
 
-
-a{
+a {
 	margin: 10px;
 	font-weight: bold;
 	color: #636363;
@@ -38,24 +38,26 @@ p.message {
 	color: blue;
 }
 
-span.error {
-	color: red;
-}
-
 span.information {
 	color: blue;
 }
 
-.success {
-	margin-left: 30px;
-	color: #4F8A10;
-	background-color: #DFF2BF;
-	background-image: url('success.png');
+.success, .error {
 	border: 1px solid;
 	margin: 10px 0px;
 	padding: 15px 10px 15px 50px;
 	background-repeat: no-repeat;
 	background-position: 10px center;
+}
+
+.success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+}
+
+.error {
+	color: #D8000C;
+	background-color: #FFBABA;
 }
 
 ul li {
@@ -64,13 +66,11 @@ ul li {
 	font-size: large;
 }
 
-.loginInput
-{
+.loginInput {
 	min-width: 220px;
 }
 
-.filterDiv
-{
+.filterDiv {
 	width: 100%;
 	background: #FAFAFA;
 	border-right-width: 1px;
@@ -81,8 +81,7 @@ ul li {
 	margin: 10px;
 }
 
-.addbutton
-{	
+.addbutton {
 	margin: 10px;
 }
 
@@ -109,7 +108,7 @@ table a:active,table a:hover {
 
 .tableDiv {
 	overflow: auto;
-	width: 100%;	
+	width: 100%;
 	height: 65%;
 }
 

@@ -25,7 +25,7 @@
 		<tr>
 			<td>Barcode:</td>
 			<td><input type="text" name="barcode" value="${form.barcode}"
-			<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
+			<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Kartonid:</td>
@@ -33,18 +33,18 @@
 		</tr>
 		<tr>
 			<td>Lagernummer:</td>
-			<td><input type="text" name="lagernummer"
+			<td><input type="text" name="lagernummer" maxlength="3"
 				value="${form.lagernummer}"
-				<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly class="readonly""</c:if>></td>
+				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Mandant:</td>
 			<td><input type="text" name="mandant" value="${form.mandant}"
-				<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly class="readonly""</c:if>></td>
+				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Istgewicht:</td>
-			<td><input type="number" name="istgewicht" step="any" min="0
+			<td><input type="number" name="istgewicht" step="any" min="0"
 				value="${form.istgewicht}"></td>
 		</tr>
 		<tr>
@@ -54,20 +54,20 @@
 		</tr>
 		<tr>
 			<td>Maximalgewicht:</td>
-			<td><input type="number" name="maximalgewicht" step="any" min="0
+			<td><input type="number" name="maximalgewicht" step="any" min="0"
 				value="${form.maximalgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Lieferscheinnummer:</td>
 			<td><input type="text" name="lieferscheinnummer"
 				value="${form.lieferscheinnummer}"
-				<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly class="readonly""</c:if>></td>
+				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Transportauftragsnummer:</td>
 			<td><input type="text" name="transportauftragsnummer"
 				value="${form.transportauftragsnummer}"
-				<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly class="readonly""</c:if>></td>
+				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Versandart:</td>
@@ -78,7 +78,7 @@
 			<td>Bearbeitungsstation:</td>
 			<td><input type="text" name="bearbeitungsstation"
 				value="${form.bearbeitungsstation}"
-				<c:if test="${sessionScope.bearbeitungsmodus eq 'reduced'}"> readonly="readonly class="readonly""</c:if>></td>
+				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Letztesupdate:</td>

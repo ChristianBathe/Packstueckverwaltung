@@ -14,6 +14,6 @@ public interface IPackstueckManager
 
 	public Packstueck deletePackstueckById(int Id);
 
-	void saveOrUpdatePackstueck(Packstueck packstueck);
+	boolean saveOrUpdatePackstueck(Packstueck packstueck);
 
 }

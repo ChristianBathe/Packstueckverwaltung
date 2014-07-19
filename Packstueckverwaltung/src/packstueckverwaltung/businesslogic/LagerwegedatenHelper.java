@@ -66,23 +66,7 @@ public class LagerwegedatenHelper
 			// Speichern-Button auf der Packstueckform wurde geklickt --> speichern/updaten
 			else
 			{
-				form = new LagerwegedatenForm(request);
-				Lagerwegedaten lagerwegedaten = new Lagerwegedaten();
-				form.validate(lagerwegedaten, request);
-				DaoHelper.getLagerwegedatenManager().saveOrUpdateLagerwegedaten(lagerwegedaten);
-
-				// Änderungslog anlegen
-				String alteDaten = (String) request.getSession().getAttribute("old_values");
-				if (alteDaten == null)
-					alteDaten = "Daten wurden neu angelegt";
-				String neueDaten = lagerwegedaten.getAllFieldsToString();
-				Benutzer user = (Benutzer) request.getSession().getAttribute("session_person");
-
-				DaoHelper.getReportManager().insertReport(user.getEmail(), alteDaten, neueDaten,
-						lagerwegedaten.getBarcode());
-
-				// Wieder zurück zur Liste navigieren
-				return lagerwegedatenlisteLaden(request);
+				return saveDataToDatabase(request);
 			}
 		}
 		else
@@ -94,6 +78,37 @@ public class LagerwegedatenHelper
 		return contentpage;
 	}
 
+	private static String saveDataToDatabase(HttpServletRequest request)
+	{
+		LagerwegedatenForm form = new LagerwegedatenForm(request);
+		Lagerwegedaten lagerwegedaten = new Lagerwegedaten();
+		form.validate(lagerwegedaten, request);
+
+		// Update/Insert versuchen. Wenn es nicht klappt, wird eine Fehlermeldung ausgegeben
+		if (DaoHelper.getLagerwegedatenManager().saveOrUpdateLagerwegedaten(lagerwegedaten))
+		{
+			// Änderungslog anlegen
+			String alteDaten = (String) request.getSession().getAttribute("old_values");
+			if (alteDaten == null)
+				alteDaten = "Daten wurden neu angelegt";
+
+			String neueDaten = lagerwegedaten.getAllFieldsToString();
+			Benutzer user = (Benutzer) request.getSession().getAttribute("session_person");
+
+			DaoHelper.getReportManager().insertReport(user.getEmail(), alteDaten, neueDaten,
+					lagerwegedaten.getBarcode());
+
+			request.getSession().setAttribute("global_message", "Daten erfolgreich gespeichert");
+		}
+		else
+		{
+			request.getSession().setAttribute("global_error", "Fehler beim Speichern der Daten!");
+		}
+
+		// Wieder zurück zur Liste navigieren
+		return lagerwegedatenlisteLaden(request);
+	}
+
 	public static String deleteLagerwegedaten(HttpServletRequest request)
 	{
 		if (request.getParameter("id") != null)
@@ -101,6 +116,8 @@ public class LagerwegedatenHelper
 			int id = Integer.valueOf(request.getParameter("id"));
 			DaoHelper.getLagerwegedatenManager().deleteLagerwegedatenById(id);
 		}
+
+		request.getSession().setAttribute("global_message", "Datensatz wurde gelöscht!");
 
 		// Wieder zurück zur Liste navigieren
 		return lagerwegedatenlisteLaden(request);

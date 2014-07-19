@@ -12,7 +12,7 @@ public interface ILagerwegedatenManager
 
 	public Lagerwegedaten getLagerwegedatenById(int id);
 
-	void saveOrUpdateLagerwegedaten(Lagerwegedaten lagerwegdaten);
+	boolean saveOrUpdateLagerwegedaten(Lagerwegedaten lagerwegdaten);
 
 	Lagerwegedaten deleteLagerwegedatenById(int Id);
 }

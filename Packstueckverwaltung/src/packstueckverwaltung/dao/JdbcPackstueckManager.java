@@ -217,15 +217,17 @@ public class JdbcPackstueckManager implements IPackstueckManager
 	}
 
 	@Override
-	public void saveOrUpdatePackstueck(Packstueck packstueck)
+	public boolean saveOrUpdatePackstueck(Packstueck packstueck)
 	{
 		try (Connection c = DatabaseHelper.getInstance();)
 		{
 			getPackstueckInsertUpdateStatement(packstueck, c).executeUpdate();
+			return true;
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			return false;
 		}
 	}
 

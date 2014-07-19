@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<td>ID:</td>
-			<td><input name="id" value="${form.id}" readonly="readonly"></td>
+			<td><input name="id" value="${form.id}" readonly="readonly" class="readonly"></td>
 		</tr>
 		<tr>
 			<td>Barcode:</td>
@@ -41,12 +41,12 @@
 		<tr>
 			<td>Letztesupdate:</td>
 			<td><input type="text" name="letztesupdate"
-				value="${form.letztesupdate}" readonly="readonly"></td>
+				value="${form.letztesupdate}" readonly="readonly" class="readonly"></td>
 		</tr>
 		<tr>
 			<td>Erstellungsdatum:</td>
 			<td><input type="text" name="erstellungsdatum"
-				value="${form.erstellungsdatum}" readonly="readonly"></td>
+				value="${form.erstellungsdatum}" readonly="readonly" class="readonly"></td>
 		</tr>
 
 	</table>

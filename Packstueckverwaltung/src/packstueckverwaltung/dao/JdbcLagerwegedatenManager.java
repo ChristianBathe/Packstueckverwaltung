@@ -185,15 +185,17 @@ public class JdbcLagerwegedatenManager implements ILagerwegedatenManager
 	}
 
 	@Override
-	public void saveOrUpdateLagerwegedaten(Lagerwegedaten lagerwegedaten)
+	public boolean saveOrUpdateLagerwegedaten(Lagerwegedaten lagerwegedaten)
 	{
 		try (Connection c = DatabaseHelper.getInstance();)
 		{
 			getLagerwegedatenInsertUpdateStatement(lagerwegedaten, c).executeUpdate();
+			return true;
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
+			return false;
 		}
 	}
 

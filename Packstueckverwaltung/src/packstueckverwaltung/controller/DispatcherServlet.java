@@ -28,6 +28,10 @@ public class DispatcherServlet extends HttpServlet
 		String contentpage = null;
 		String servletPath = request.getServletPath();
 
+		// Mögliche Info- und Fehlernachrichten zurücksetzen
+		request.getSession().setAttribute("global_message", "");
+		request.getSession().setAttribute("global_error", "");
+
 		switch (servletPath)
 		{
 			case "/login.html":
