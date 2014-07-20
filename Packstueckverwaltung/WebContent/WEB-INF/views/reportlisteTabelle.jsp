@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<div class="tableDiv">
+<div class="tableDiv" id="tableDiv">
 <!-- Wichtig ist hier die id der Tabelle. Darüber wird die Tabelle im JQuery erkannt und aktualisiert -->
-<table class="grid" id="reportTable">
+<table class="grid" >
 	<tr>
 		<th>ID</th>
 		<th>Barcode</th>

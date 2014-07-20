@@ -49,7 +49,6 @@ public class JdbcBenutzerManager implements IBenutzerManager
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			// eventuell E-Mail Versand des Fehlers, kann aber auch fehlschlagen
 		}
 		return null;
 	}

@@ -32,6 +32,7 @@ public class SecurityFilter implements Filter
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
 
+		// Prüfen, ob Person in der Session vorhanden ist. Wenn nicht, auf die Loginseite weiterleiten
 		if (request.getSession().getAttribute("session_person") == null)
 		{
 			request.setAttribute("contentpage", "login");

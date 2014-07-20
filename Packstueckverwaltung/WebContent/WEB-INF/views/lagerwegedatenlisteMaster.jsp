@@ -2,11 +2,11 @@
 <h2>Lagerwegedaten</h2>
 <!-- Für erfolgreiches Speichern der Daten -->
 <c:if test="${not empty global_message}">
-	<div class="success">${global_message}</div>
+	<div class="success" id="successDiv">${global_message}</div>
 </c:if>
 <!-- Für Fehlermeldungen -->
 <c:if test="${not empty global_error}">
-	<div class="error">${global_error}</div>
+	<div class="error" id="errorDiv">${global_error}</div>
 </c:if>
 
 <div class="filterDiv">
@@ -23,20 +23,4 @@
 	</c:if>
 </div>
 
-
-
 <jsp:include page="lagerwegedatenlisteTabelle.jsp" />
-
-<script type="text/javascript">
-	//Führt den Ajax-Request auf die übergebene URL aus. Als Parameter für den POST werden die URL und der eingegebene Barcode übergeben
-	function jqueryAjaxRequest(url) {
-		$.post(url, {
-			barcodesuchfeld : $("#barcodesuchfeld").val(),
-		},
-		//Funktion zum Verarbeiten der Antwort/Response.
-		function(data) {
-			$("#lagerwegedatenTable").html(data);
-
-		});
-	};
-</script>

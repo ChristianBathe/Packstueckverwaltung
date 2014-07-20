@@ -9,18 +9,3 @@
 </div>
 
 <jsp:include page="reportlisteTabelle.jsp" />
-
-<script type="text/javascript">
-	//Führt den Ajax-Request auf die übergebene URL aus. Als Parameter für den POST werden die URL und der eingegebene Barcode übergeben
-	function jqueryAjaxRequest(url) {
-		$.post(url, {
-			barcodesuchfeld : $("#barcodesuchfeld").val(),
-		},
-		//Funktion zum Verarbeiten der Antwort/Response.
-		function(data) {
-			$("#reportTable").html(data);
-
-		});
-
-	};
-</script>

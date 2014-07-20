@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet
 	{
 		Benutzer nutzer = DaoHelper.getBenutzerManager().getBenutzerByEmail(request.getParameter("email"));
 
-		// Prüfen, ob Daten gefunden wurden und falls ja, ob das eingegebene Passwort stimmt. Anso
+		// Prüfen, ob Daten gefunden wurden und falls ja, ob das eingegebene Passwort stimmt.
 		if (nutzer != null && request.getParameter("passwort").equals(nutzer.getPasswort()))
 		{
 			// zugehörigen Rechte des Nutzers abfragen

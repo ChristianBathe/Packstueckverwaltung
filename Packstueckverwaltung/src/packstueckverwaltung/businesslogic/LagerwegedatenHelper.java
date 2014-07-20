@@ -41,7 +41,7 @@ public class LagerwegedatenHelper
 
 	public static String updateLagerwegedaten(HttpServletRequest request)
 	{
-		// defaultwert um auf die liste zurückfallen
+		// contentpage --> Updateform
 		String contentpage = "updatelagerwegedaten";
 		LagerwegedatenForm form = null;
 
@@ -58,12 +58,10 @@ public class LagerwegedatenHelper
 				// Alte Daten an die Session speichern, um Änderungen nachverfolgen zu können
 				request.getSession().setAttribute("old_values", lagerwegedaten.getAllFieldsToString());
 
-				contentpage = "updatelagerwegedaten";
-
-				// Form mit den entsprechenden vorbelegten Packstückdaten laden
+				// Form mit den entsprechenden vorbelegten Lagerwegedaten laden
 				form = new LagerwegedatenForm(lagerwegedaten, request);
 			}
-			// Speichern-Button auf der Packstueckform wurde geklickt --> speichern/updaten
+			// Speichern-Button auf der Lagerwegedaten wurde geklickt --> speichern/updaten
 			else
 			{
 				return saveDataToDatabase(request);

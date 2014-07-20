@@ -79,6 +79,7 @@ public class DispatcherServlet extends HttpServlet
 			}
 			else
 			{
+				// Nur den betroffenen Teil neuladen und nicht die ganze Seite
 				request.getRequestDispatcher("/WEB-INF/views/" + contentpage + ".jsp").forward(request, response);
 			}
 		}

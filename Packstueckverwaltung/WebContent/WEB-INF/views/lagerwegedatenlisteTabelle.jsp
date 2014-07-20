@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<div class="tableDiv"> 
-<!-- Wichtig ist hier die id der Tabelle. Darüber wird die Tabelle im JQuery erkannt und aktualisiert -->
-	<table id="lagerwegedatenTable">
+<!-- Wichtig ist hier die id. Darüber wird das DIV im JQuery erkannt und aktualisiert -->
+<div class="tableDiv" id="tableDiv">
+	<table>
 		<tr>
 			<th>ID</th>
 			<th>Barcode</th>
@@ -33,9 +32,11 @@
 						href="<c:url value="/updatelagerwegedaten.html?id=${lwd.id}"/>">
 							<img src="<c:url value="/images/table_edit.png"/>">
 					</a></td>
-					<td><a
-						href="<c:url value="/deletelagerwegedaten.html?id=${lwd.id}"/>">
-							<img src="<c:url value="/images/cross.png"/>"> </a></td>
+					<!-- Update über JQuery, damit vorher Bestätigungsbox angezeigt werden kann -->
+					<td><img src="<c:url value="/images/cross.png"/>"
+						onclick='jqueryAjaxDelete("deletelagerwegedaten.html?id=${lwd.id}")'>
+					</td>
+
 				</c:if>
 			</tr>
 		</c:forEach>

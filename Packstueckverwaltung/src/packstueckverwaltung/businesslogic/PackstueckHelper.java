@@ -41,7 +41,7 @@ public class PackstueckHelper
 
 	public static String updatePackstueck(HttpServletRequest request)
 	{
-		// defaultwert um auf die liste zurückfallen
+		// contentpage --> Updateform
 		String contentpage = "updatepackstueck";
 		PackstueckForm form = null;
 

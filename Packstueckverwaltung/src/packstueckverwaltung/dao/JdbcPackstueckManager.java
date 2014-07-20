@@ -84,7 +84,6 @@ public class JdbcPackstueckManager implements IPackstueckManager
 
 		if (packstueck.getId() == Constants.NEW_DATA_SET_ID)
 		{
-			// TODO erstellungszeiten usw. fuellen.
 			pst.setString(counter++, packstueck.getBarcode());
 			pst.setString(counter++, packstueck.getLagernummer());
 			pst.setString(counter++, packstueck.getMandant());
