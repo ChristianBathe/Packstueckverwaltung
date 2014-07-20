@@ -30,6 +30,7 @@ public class LagerwegedatenForm
 		letztesupdate = request.getParameter("letztesupdate");
 	}
 
+	// Konstruktur zum vorbelegen der Form mit Werten aus der Datenbank
 	public LagerwegedatenForm(Lagerwegedaten lagerwegedaten, HttpServletRequest request)
 	{
 		if (lagerwegedaten.getId() != Constants.NEW_DATA_SET_ID)

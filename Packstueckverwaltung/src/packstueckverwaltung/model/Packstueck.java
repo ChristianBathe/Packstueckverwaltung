@@ -82,7 +82,12 @@ public class Packstueck
 
 	public String getIstgewicht()
 	{
-		return istgewicht;
+		// Umwandlung der Kommastellen nötig, damit die Oberfläche den Text als Number erkennt. Ansonsten bleiben die
+		// Zahlenfelder leer.
+		if (!istgewicht.equals(""))
+			return istgewicht.replace(',', '.');
+		else
+			return "0";
 	}
 
 	public void setIstgewicht(String istgewicht)
@@ -92,7 +97,12 @@ public class Packstueck
 
 	public String getMinimalgewicht()
 	{
-		return minimalgewicht;
+		// Umwandlung der Kommastellen nötig, damit die Oberfläche den Text als Number erkennt. Ansonsten bleiben die
+		// Zahlenfelder leer.
+		if (!minimalgewicht.equals(""))
+			return minimalgewicht.replace(',', '.');
+		else
+			return "0";
 	}
 
 	public void setMinimalgewicht(String minimalgewicht)
@@ -102,7 +112,12 @@ public class Packstueck
 
 	public String getMaximalgewicht()
 	{
-		return maximalgewicht;
+		// Umwandlung der Kommastellen nötig, damit die Oberfläche den Text als Number erkennt. Ansonsten bleiben die
+		// Zahlenfelder leer.
+		if (!maximalgewicht.equals(""))
+			return maximalgewicht.replace(',', '.');
+		else
+			return "0";
 	}
 
 	public void setMaximalgewicht(String maximalgewicht)

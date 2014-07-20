@@ -24,19 +24,19 @@
 		</tr>
 		<tr>
 			<td>Barcode:</td>
-			<td><input type="text" name="barcode" value="${form.barcode}"></td>
+			<td><input type="text" name="barcode" value="${form.barcode}" maxlength="20"></td>
 		</tr>
 		<tr>
 			<td>Kartonid:</td>
-			<td><input type="text" name="kartonid" value="${form.kartonid}"></td>
+			<td><input type="text" name="kartonid" value="${form.kartonid}" maxlength="20"></td>
 		</tr>
 		<tr>
 			<td>Wege ID:</td>
-			<td><input type="text" name="wegeid" value="${form.wegeid}"></td>
+			<td><input type="text" name="wegeid" value="${form.wegeid}" maxlength="20"></td>
 		</tr>
 		<tr>
 			<td>Wegpunkt:</td>
-			<td><input type="text" name="wegpunkt" value="${form.wegpunkt}"></td>
+			<td><input type="text" name="wegpunkt" value="${form.wegpunkt}" maxlength="10"></td>
 		</tr>
 		<tr>
 			<td>Letztesupdate:</td>
@@ -50,5 +50,5 @@
 		</tr>
 
 	</table>
-	<input type="submit" name="saveaction" value="speichern">
+	<input type="submit" name="saveaction" value="Speichern">
 </form>

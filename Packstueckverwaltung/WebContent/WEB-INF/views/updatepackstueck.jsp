@@ -24,12 +24,12 @@
 		</tr>
 		<tr>
 			<td>Barcode:</td>
-			<td><input type="text" name="barcode" value="${form.barcode}"
+			<td><input type="text" name="barcode" value="${form.barcode}" maxlength="20"
 			<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Kartonid:</td>
-			<td><input type="text" name="kartonid" value="${form.kartonid}"></td>
+			<td><input type="text" name="kartonid" value="${form.kartonid}" maxlength="20"></td>
 		</tr>
 		<tr>
 			<td>Lagernummer:</td>
@@ -39,44 +39,44 @@
 		</tr>
 		<tr>
 			<td>Mandant:</td>
-			<td><input type="text" name="mandant" value="${form.mandant}"
+			<td><input type="text" name="mandant" value="${form.mandant}" maxlength="3"
 				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Istgewicht:</td>
-			<td><input type="number" name="istgewicht" step="any" min="0"
+			<td><input type="number" name="istgewicht" step="any" min="0" maxlength="13"
 				value="${form.istgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Minimalgewicht:</td>
-			<td><input type="number" name="minimalgewicht" step="any" min="0"
+			<td><input type="number" name="minimalgewicht" step="any" min="0" maxlength="3"
 				value="${form.minimalgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Maximalgewicht:</td>
-			<td><input type="number" name="maximalgewicht" step="any" min="0"
+			<td><input type="number" name="maximalgewicht" step="any" min="0" maxlength="3"
 				value="${form.maximalgewicht}"></td>
 		</tr>
 		<tr>
 			<td>Lieferscheinnummer:</td>
-			<td><input type="text" name="lieferscheinnummer"
+			<td><input type="text" name="lieferscheinnummer" maxlength="20"
 				value="${form.lieferscheinnummer}"
 				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Transportauftragsnummer:</td>
-			<td><input type="text" name="transportauftragsnummer"
+			<td><input type="text" name="transportauftragsnummer" maxlength="20"
 				value="${form.transportauftragsnummer}"
 				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
 		<tr>
 			<td>Versandart:</td>
-			<td><input type="text" name="versandart"
+			<td><input type="text" name="versandart" maxlength="10"
 				value="${form.versandart}"></td>
 		</tr>
 		<tr>
 			<td>Bearbeitungsstation:</td>
-			<td><input type="text" name="bearbeitungsstation"
+			<td><input type="text" name="bearbeitungsstation" maxlength="10"
 				value="${form.bearbeitungsstation}"
 				<c:if test="${bearbeitungsmodus eq 'reduced'}"> readonly="readonly" class="readonly"</c:if>></td>
 		</tr>
@@ -107,5 +107,5 @@
 		</tr>
 
 	</table>
-	<input type="submit" name="saveaction" value="speichern">
+	<input type="submit" name="saveaction" value="Speichern">
 </form>

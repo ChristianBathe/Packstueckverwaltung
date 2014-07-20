@@ -50,6 +50,7 @@ public class PackstueckForm
 		manuellAngelegt = Boolean.parseBoolean(request.getParameter("manuellAngelegt"));
 	}
 
+	// Konstruktur zum vorbelegen der Form mit Werten aus der Datenbank
 	public PackstueckForm(Packstueck packstueck, HttpServletRequest request)
 	{
 		if (packstueck.getId() != Constants.NEW_DATA_SET_ID)

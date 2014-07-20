@@ -19,7 +19,7 @@
 	<c:if test="${sessionScope.schreibrecht eq true}">
 		<input type="button"
 			onclick="window.location='/Packstueckverwaltung//updatelagerwegedaten.html'"
-			value="Packstück hinzufügen" class="addbutton">
+			value="Lagerwegedaten hinzufügen" class="addbutton">
 	</c:if>
 </div>
 
