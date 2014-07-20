@@ -24,7 +24,7 @@ function hideMessageDivs(){
 //Führt den Ajax-Request auf die übergebene URL aus. Als Parameter für den POST wird nur die URL übergeben
 function jqueryAjaxDelete(url) {
 	
-	var answer = confirm("Daten wirklich löschen?");
+	var answer = confirm("Daten wirklich loeschen?");
 	if (answer){
 		$.post(url,
 				//Funktion zum Verarbeiten der Antwort/Response.
