@@ -35,8 +35,11 @@
 	</section>
 	<footer>
 		<hr>
-		<a href="https://github.com/ChristianBathe/Packstueckverwaltung">GitHub
-			Quellcode</a>
+			<address>
+			
+			<a href="mailto:christian.bathe@bertelsmann.de">christian.bathe@bertelsmann.de</a> <a href="mailto:sven.hoischen@bertelsmann.de">sven.hoischen@bertelsmann.de</a>
+		
+		</address>
 	</footer>
 </body>
 </html>
